@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table class="easyui-datagrid" rownumbers="true" fitColumns="true"
+	<table id="datagrid" class="easyui-datagrid" rownumbers="true" fitColumns="true"
 		pagination="true"
 		data-options="fit:true,singleSelect:true,url:'${ctx}/user/findAll.action',method:'get',toolbar:'#toolbar'">
 		<thead>
@@ -29,7 +29,20 @@
 		<a class="easyui-linkbutton" iconCls="icon-add">添加</a>
 		<a class="easyui-linkbutton" iconCls="icon-edit">修改</a>
 		<a class="easyui-linkbutton" iconCls="icon-remove">删除</a>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<input class="easyui-searchbox" data-options="prompt:'用户名',searcher:doSearch" style="width:150px"></input>
 	</div>
 
+<script type="text/javascript">
+	/* 查找 */
+	function doSearch(value){
+		$("#datagrid").datagrid("load",{
+			'userName':value
+		})
+	}
+	
+</script>
 </body>
 </html>
+
+

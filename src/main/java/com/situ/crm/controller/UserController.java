@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.situ.crm.common.EasyUIDataGrideResult;
+import com.situ.crm.pojo.User;
 import com.situ.crm.service.IUserService;
 
 @Controller
@@ -21,7 +22,7 @@ public class UserController {
 	
 	@RequestMapping("/findAll")
 	@ResponseBody
-	public EasyUIDataGrideResult findAll(Integer page, Integer rows) {
-		return userService.findAll(page, rows);
+	public EasyUIDataGrideResult findAll(Integer page, Integer rows, User user) {
+		return userService.findAll(page, rows, user);
 	}
 }

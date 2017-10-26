@@ -1,6 +1,7 @@
 package com.situ.crm.service;
 
 import com.situ.crm.common.EasyUIDataGrideResult;
+import com.situ.crm.pojo.User;
 
 public interface IUserService {
 	/**
@@ -9,5 +10,5 @@ public interface IUserService {
 	 * @param rows 一页多少数据
 	 * @return
 	 */
-	EasyUIDataGrideResult findAll(Integer page, Integer rows);
+	EasyUIDataGrideResult findAll(Integer page, Integer rows, User user);
 }
