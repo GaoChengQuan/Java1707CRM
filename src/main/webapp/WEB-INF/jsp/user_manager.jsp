@@ -8,17 +8,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table class="easyui-datagrid" title="DataGrid with Toolbar"
-		data-options="rownumbers:true,fit:true,singleSelect:true,url:'${ctx}/user/findAll.action',method:'get',toolbar:'#toolbar'">
+	<table class="easyui-datagrid" rownumbers="true" fitColumns="true"
+		pagination="true"
+		data-options="fit:true,singleSelect:true,url:'${ctx}/user/findAll.action',method:'get',toolbar:'#toolbar'">
 		<thead>
 			<tr>
-				<th data-options="field:'id',width:80">编号</th>
-				<th data-options="field:'userName',width:100">用户名</th>
-				<th data-options="field:'password',width:80,align:'right'">密码</th>
-				<th data-options="field:'trueName',width:80,align:'right'">真实姓名</th>
-				<th data-options="field:'email',width:240">邮件</th>
-				<th data-options="field:'phone',width:60,align:'center'">联系电话</th>
-				<th data-options="field:'roleName',width:60,align:'center'">角色</th>
+				<th data-options="field:'id',width:80,align:'center'">编号</th>
+				<th data-options="field:'userName',width:100,align:'center'">用户名</th>
+				<th data-options="field:'password',width:80,align:'center'">密码</th>
+				<th data-options="field:'trueName',width:80,align:'center'">真实姓名</th>
+				<th data-options="field:'email',width:100,align:'center'">邮件</th>
+				<th data-options="field:'phone',width:100,align:'center'">联系电话</th>
+				<th data-options="field:'roleName',width:100,align:'center'">角色</th>
 			</tr>
 		</thead>
 	</table>
