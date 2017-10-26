@@ -121,8 +121,8 @@
 					href="javascript:openTab('产品信息查询','productSearch.jsp','icon-cpxxgl')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-cpxxgl'"
-					style="width: 150px;">产品信息查询</a> <a
-					href="javascript:openTab('用户信息管理','${ctx}/user/index.action','icon-user')"
+					style="width: 150px;">产品信息查询</a> 
+					<a href="javascript:openTab('用户信息管理','${ctx}/user/index.action','icon-user')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-user'" style="width: 150px;">用户信息管理</a>
 			</div>
@@ -138,7 +138,7 @@
 		</div>
 	</div>
 	<div region="south" style="height: 25px; padding: 5px" align="center">
-		版本所有 java知识分享网 <a href="http://www.java1234.com" target="_blank">http://www.java1234.com</a>(2013-2015)
+		Java1707CRM管理系统
 	</div>
 
 </body>
