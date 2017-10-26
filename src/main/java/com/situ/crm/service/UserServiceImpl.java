@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.situ.crm.common.EasyUIDataGrideResult;
+import com.situ.crm.common.ServerResponse;
 import com.situ.crm.dao.UserMapper;
 import com.situ.crm.pojo.User;
 import com.situ.crm.pojo.UserExample;
@@ -40,6 +41,15 @@ public class UserServiceImpl implements IUserService{
 		result.setTotal(total);
 		result.setRows(userList);
 		return result;
+	}
+
+	@Override
+	public ServerResponse delete(String ids) {
+		String[] idArray = ids.split(",");
+		for (String id : idArray) {
+			userMapper.deleteByPrimaryKey(Integer.parseInt(id));
+		}
+		return ServerResponse.createSuccess("数据已经成功删除");
 	}
 
 }

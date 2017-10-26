@@ -10,9 +10,10 @@
 <body>
 	<table id="datagrid" class="easyui-datagrid" rownumbers="true" fitColumns="true"
 		pagination="true"
-		data-options="fit:true,singleSelect:true,url:'${ctx}/user/findAll.action',method:'get',toolbar:'#toolbar'">
+		data-options="fit:true,singleSelect:false,url:'${ctx}/user/findAll.action',method:'get',toolbar:'#toolbar'">
 		<thead>
 			<tr>
+				<th data-options="field:'cb',checkbox:true,align:'center'"></th>
 				<th data-options="field:'id',width:80,align:'center'">编号</th>
 				<th data-options="field:'userName',width:100,align:'center'">用户名</th>
 				<th data-options="field:'password',width:80,align:'center'">密码</th>
@@ -28,7 +29,7 @@
 	<div id="toolbar">
 		<a class="easyui-linkbutton" iconCls="icon-add">添加</a>
 		<a class="easyui-linkbutton" iconCls="icon-edit">修改</a>
-		<a class="easyui-linkbutton" iconCls="icon-remove">删除</a>
+		<a class="easyui-linkbutton" href="javascript:doDelete()" iconCls="icon-remove">删除</a>
 		&nbsp;&nbsp;&nbsp;&nbsp;
 		<input class="easyui-searchbox" data-options="prompt:'用户名',searcher:doSearch" style="width:150px"></input>
 	</div>
@@ -38,6 +39,37 @@
 	function doSearch(value){
 		$("#datagrid").datagrid("load",{
 			'userName':value
+		})
+	}
+	
+	/* 删除 */
+	function doDelete(){
+		//getSelections none 返回所有被选中的行，当没有记录被选中的时候将返回一个空数组。 
+		var selectedIds = $("#datagrid").datagrid("getSelections");
+		console.log(selectedIds);
+		var ids = [];//[1,2,3]
+		for(var i in selectedIds){
+			ids.push(selectedIds[i].id);
+		}
+		ids = ids.join(",");// 1,2,3
+		if (ids.length == 0) {
+			$.messager.alert("系统提示", "请选择要删除的数据");
+			return;
+		}
+		$.messager.confirm("系统提示", "您确认要删除么", function(r){
+			if (r){
+				$.post(
+					"${ctx}/user/delete.action",
+					{ids:ids}, 
+					function(result) {
+						$.messager.alert("系统提示", result.msg);
+						if(result.status == 0) {
+							$("#datagrid").datagrid("reload");
+						}
+					},
+					"json"
+				);
+			}
 		})
 	}
 	
