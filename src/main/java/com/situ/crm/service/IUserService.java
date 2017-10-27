@@ -14,4 +14,8 @@ public interface IUserService {
 	EasyUIDataGrideResult findAll(Integer page, Integer rows, User user);
 
 	ServerResponse delete(String ids);
+
+	ServerResponse add(User user);
+
+	ServerResponse update(User user);
 }
