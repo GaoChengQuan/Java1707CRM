@@ -44,14 +44,7 @@
 	
 	/* 删除 */
 	function doDelete(){
-		//getSelections none 返回所有被选中的行，当没有记录被选中的时候将返回一个空数组。 
-		var selectedIds = $("#datagrid").datagrid("getSelections");
-		console.log(selectedIds);
-		var ids = [];//[1,2,3]
-		for(var i in selectedIds){
-			ids.push(selectedIds[i].id);
-		}
-		ids = ids.join(",");// 1,2,3
+		var ids = Util.getSelectionsIds("#datagrid");
 		if (ids.length == 0) {
 			$.messager.alert("系统提示", "请选择要删除的数据");
 			return;
@@ -63,7 +56,7 @@
 					{ids:ids}, 
 					function(result) {
 						$.messager.alert("系统提示", result.msg);
-						if(result.status == 0) {
+						if(result.status == Util.SUCCESS) {
 							$("#datagrid").datagrid("reload");
 						}
 					},
