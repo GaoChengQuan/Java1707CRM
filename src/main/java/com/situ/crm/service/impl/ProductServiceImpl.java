@@ -1,4 +1,4 @@
-package com.situ.crm.service;
+package com.situ.crm.service.impl;
 
 import java.util.List;
 
@@ -10,36 +10,37 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.situ.crm.common.EasyUIDataGrideResult;
 import com.situ.crm.common.ServerResponse;
-import com.situ.crm.dao.UserMapper;
-import com.situ.crm.pojo.User;
-import com.situ.crm.pojo.UserExample;
-import com.situ.crm.pojo.UserExample.Criteria;
+import com.situ.crm.dao.ProductMapper;
+import com.situ.crm.pojo.Product;
+import com.situ.crm.pojo.ProductExample;
+import com.situ.crm.pojo.ProductExample.Criteria;
+import com.situ.crm.service.IProductService;
 import com.situ.crm.util.Util;
 
 @Service
-public class UserServiceImpl implements IUserService{
+public class ProductServiceImpl implements IProductService{
 	@Autowired
-	private UserMapper userMapper;
+	private ProductMapper productMapper;
 
 	@Override
-	public EasyUIDataGrideResult findAll(Integer page, Integer rows, User user) {
+	public EasyUIDataGrideResult findAll(Integer page, Integer rows, Product product) {
 		EasyUIDataGrideResult result = new EasyUIDataGrideResult();
-		UserExample userExample = new UserExample();
+		ProductExample productExample = new ProductExample();
 		//1、设置分页 
 		PageHelper.startPage(page, rows);
 		//2、执行查询
 		//rows(分页之后的数据)
-		Criteria createCriteria = userExample.createCriteria();
-		if (StringUtils.isNotEmpty(user.getUserName())) {
-			createCriteria.andUserNameLike(Util.formatLike(user.getUserName()));
+		Criteria createCriteria = productExample.createCriteria();
+		if (StringUtils.isNotEmpty(product.getProductName())) {
+			createCriteria.andProductNameLike(Util.formatLike(product.getProductName()));
 		}
-		List<User> userList = userMapper.selectByExample(userExample);
+		List<Product> productList = productMapper.selectByExample(productExample);
 		//total
-		PageInfo<User> pageInfo = new PageInfo<>(userList);
+		PageInfo<Product> pageInfo = new PageInfo<>(productList);
 		int total = (int)pageInfo.getTotal();
 		
 		result.setTotal(total);
-		result.setRows(userList);
+		result.setRows(productList);
 		return result;
 	}
 
@@ -47,22 +48,22 @@ public class UserServiceImpl implements IUserService{
 	public ServerResponse delete(String ids) {
 		String[] idArray = ids.split(",");
 		for (String id : idArray) {
-			userMapper.deleteByPrimaryKey(Integer.parseInt(id));
+			productMapper.deleteByPrimaryKey(Integer.parseInt(id));
 		}
 		return ServerResponse.createSuccess("数据已经成功删除");
 	}
 
 	@Override
-	public ServerResponse add(User user) {
-		if (userMapper.insert(user) > 0) {
+	public ServerResponse add(Product product) {
+		if (productMapper.insert(product) > 0) {
 			return ServerResponse.createSuccess("添加成功! ");
 		}
 		return ServerResponse.createError("添加失败!");
 	}
 
 	@Override
-	public ServerResponse update(User user) {
-		if (userMapper.updateByPrimaryKey(user) > 0) {
+	public ServerResponse update(Product product) {
+		if (productMapper.updateByPrimaryKey(product) > 0) {
 			return ServerResponse.createSuccess("修改成功! ");
 		}
 		return ServerResponse.createError("修改失败!");

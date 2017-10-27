@@ -118,7 +118,7 @@
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-sjzdgl'"
 					style="width: 150px;">数据字典管理</a> <a
-					href="javascript:openTab('产品信息查询','productSearch.jsp','icon-cpxxgl')"
+					href="javascript:openTab('产品信息查询','${ctx}/product/index.action','icon-cpxxgl')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-cpxxgl'"
 					style="width: 150px;">产品信息查询</a> 
