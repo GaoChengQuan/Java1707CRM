@@ -27,4 +27,10 @@ public interface DataDicMapper {
     int updateByPrimaryKeySelective(DataDic record);
 
     int updateByPrimaryKey(DataDic record);
+    
+    /**
+     * 返回数据字典名字去重之后的列表
+     * @return
+     */
+	List<DataDic> findDataDicName();
 }
