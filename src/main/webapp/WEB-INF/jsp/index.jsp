@@ -114,7 +114,7 @@
 			<div title="基础数据管理" data-options="iconCls:'icon-jcsjgl'"
 				style="padding: 10px">
 				<a
-					href="javascript:openTab('数据字典管理','dataDicManage.jsp','icon-sjzdgl')"
+					href="javascript:openTab('数据字典管理','${ctx}/dataDic/index.action','icon-sjzdgl')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-sjzdgl'"
 					style="width: 150px;">数据字典管理</a> <a
