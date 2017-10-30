@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.situ.crm.dao.OrderDetailsMapper" >
-  <resultMap id="BaseResultMap" type="com.situ.crm.pojo.OrderDetails" >
+<mapper namespace="com.situ.crm.dao.OrderItemMapper" >
+  <resultMap id="BaseResultMap" type="com.situ.crm.pojo.OrderItem" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
-    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
-    <result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_num" property="productNum" jdbcType="INTEGER" />
     <result column="unit" property="unit" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="REAL" />
     <result column="sum" property="sum" jdbcType="REAL" />
@@ -69,15 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, order_id, goods_name, goods_num, unit, price, sum
+    id, order_id, product_name, product_num, unit, price, sum
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.situ.crm.pojo.OrderDetailsExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.situ.crm.pojo.OrderItemExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from order_details
+    from order_item
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,29 +88,29 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from order_details
+    from order_item
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from order_details
+    delete from order_item
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.situ.crm.pojo.OrderDetailsExample" >
-    delete from order_details
+  <delete id="deleteByExample" parameterType="com.situ.crm.pojo.OrderItemExample" >
+    delete from order_item
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.situ.crm.pojo.OrderDetails" >
-    insert into order_details (id, order_id, goods_name, 
-      goods_num, unit, price, 
+  <insert id="insert" parameterType="com.situ.crm.pojo.OrderItem" >
+    insert into order_item (id, order_id, product_name, 
+      product_num, unit, price, 
       sum)
-    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, 
-      #{goodsNum,jdbcType=INTEGER}, #{unit,jdbcType=VARCHAR}, #{price,jdbcType=REAL}, 
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, 
+      #{productNum,jdbcType=INTEGER}, #{unit,jdbcType=VARCHAR}, #{price,jdbcType=REAL}, 
       #{sum,jdbcType=REAL})
   </insert>
-  <insert id="insertSelective" parameterType="com.situ.crm.pojo.OrderDetails" >
-    insert into order_details
+  <insert id="insertSelective" parameterType="com.situ.crm.pojo.OrderItem" >
+    insert into order_item
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -118,11 +118,11 @@
       <if test="orderId != null" >
         order_id,
       </if>
-      <if test="goodsName != null" >
-        goods_name,
+      <if test="productName != null" >
+        product_name,
       </if>
-      <if test="goodsNum != null" >
-        goods_num,
+      <if test="productNum != null" >
+        product_num,
       </if>
       <if test="unit != null" >
         unit,
@@ -141,11 +141,11 @@
       <if test="orderId != null" >
         #{orderId,jdbcType=INTEGER},
       </if>
-      <if test="goodsName != null" >
-        #{goodsName,jdbcType=VARCHAR},
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
       </if>
-      <if test="goodsNum != null" >
-        #{goodsNum,jdbcType=INTEGER},
+      <if test="productNum != null" >
+        #{productNum,jdbcType=INTEGER},
       </if>
       <if test="unit != null" >
         #{unit,jdbcType=VARCHAR},
@@ -158,14 +158,14 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.situ.crm.pojo.OrderDetailsExample" resultType="java.lang.Integer" >
-    select count(*) from order_details
+  <select id="countByExample" parameterType="com.situ.crm.pojo.OrderItemExample" resultType="java.lang.Integer" >
+    select count(*) from order_item
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update order_details
+    update order_item
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
@@ -173,11 +173,11 @@
       <if test="record.orderId != null" >
         order_id = #{record.orderId,jdbcType=INTEGER},
       </if>
-      <if test="record.goodsName != null" >
-        goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      <if test="record.productName != null" >
+        product_name = #{record.productName,jdbcType=VARCHAR},
       </if>
-      <if test="record.goodsNum != null" >
-        goods_num = #{record.goodsNum,jdbcType=INTEGER},
+      <if test="record.productNum != null" >
+        product_num = #{record.productNum,jdbcType=INTEGER},
       </if>
       <if test="record.unit != null" >
         unit = #{record.unit,jdbcType=VARCHAR},
@@ -194,11 +194,11 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update order_details
+    update order_item
     set id = #{record.id,jdbcType=INTEGER},
       order_id = #{record.orderId,jdbcType=INTEGER},
-      goods_name = #{record.goodsName,jdbcType=VARCHAR},
-      goods_num = #{record.goodsNum,jdbcType=INTEGER},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      product_num = #{record.productNum,jdbcType=INTEGER},
       unit = #{record.unit,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=REAL},
       sum = #{record.sum,jdbcType=REAL}
@@ -206,17 +206,17 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.situ.crm.pojo.OrderDetails" >
-    update order_details
+  <update id="updateByPrimaryKeySelective" parameterType="com.situ.crm.pojo.OrderItem" >
+    update order_item
     <set >
       <if test="orderId != null" >
         order_id = #{orderId,jdbcType=INTEGER},
       </if>
-      <if test="goodsName != null" >
-        goods_name = #{goodsName,jdbcType=VARCHAR},
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
       </if>
-      <if test="goodsNum != null" >
-        goods_num = #{goodsNum,jdbcType=INTEGER},
+      <if test="productNum != null" >
+        product_num = #{productNum,jdbcType=INTEGER},
       </if>
       <if test="unit != null" >
         unit = #{unit,jdbcType=VARCHAR},
@@ -230,11 +230,11 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.situ.crm.pojo.OrderDetails" >
-    update order_details
+  <update id="updateByPrimaryKey" parameterType="com.situ.crm.pojo.OrderItem" >
+    update order_item
     set order_id = #{orderId,jdbcType=INTEGER},
-      goods_name = #{goodsName,jdbcType=VARCHAR},
-      goods_num = #{goodsNum,jdbcType=INTEGER},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_num = #{productNum,jdbcType=INTEGER},
       unit = #{unit,jdbcType=VARCHAR},
       price = #{price,jdbcType=REAL},
       sum = #{sum,jdbcType=REAL}

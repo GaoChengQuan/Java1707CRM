@@ -10,7 +10,7 @@
 	/* 查找 */
 	function doSearch(value){
 		$("#datagrid").datagrid("load",{
-			'productName':value
+			'name':value
 		})
 	}
 	
@@ -72,7 +72,7 @@
 		        return $(this).form("validate");
 		    },    
 		    success:function(data){//正常返回ServerResponse
-		    	alert(data);
+		    	//alert(data);
 		    	var data = eval('(' + data + ')');
 		    	if(data.status == Util.SUCCESS) {
 		    		$.messager.alert("系统提示", data.msg);
@@ -94,11 +94,11 @@
 			<tr>
 				<th data-options="field:'cb',checkbox:true,align:'center'"></th>
 				<th data-options="field:'id',width:80,align:'center'">编号</th>
-				<th data-options="field:'productName',width:100,align:'center'">产品名称</th>
+				<th data-options="field:'name',width:100,align:'center'">产品名称</th>
 				<th data-options="field:'model',width:80,align:'center'">型号</th>
 				<th data-options="field:'unit',width:80,align:'center'">单位</th>
 				<th data-options="field:'price',width:100,align:'center'">价格</th>
-				<th data-options="field:'store',width:100,align:'center'">库存</th>
+				<th data-options="field:'stock',width:100,align:'center'">库存</th>
 				<th data-options="field:'remark',width:100,align:'center'">备注</th>
 			</tr>
 		</thead>
@@ -122,7 +122,7 @@
 			<table cellspacing="8px">
 				<tr>
 					<td>产品名称：</td>
-					<td><input type="text" id="productName" name="productName" class="easyui-validatebox" required="true"/><font color="red">*</font></td>
+					<td><input type="text" id="name" name="name" class="easyui-validatebox" required="true"/><font color="red">*</font></td>
 					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 					<td>模型：</td>
 					<td><input type="text" id="model" name="model" class="easyui-validatebox" required="true"/><font color="red">*</font></td>
@@ -136,7 +136,7 @@
 				</tr>
 				<tr>
 					<td>库存：</td>
-					<td><input type="text" id="store" name="store" class="easyui-validatebox" required="true"/><font color="red">*</font></td>
+					<td><input type="text" id="stock" name="stock" class="easyui-validatebox" required="true"/><font color="red">*</font></td>
 					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 					<td>备注：</td>
 					<td><input type="text" id="remark" name="remark" class="easyui-validatebox" required="true"/><font color="red">*</font></td>

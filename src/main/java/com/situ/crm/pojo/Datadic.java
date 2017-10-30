@@ -1,6 +1,6 @@
 package com.situ.crm.pojo;
 
-public class Datadic {
+public class DataDic {
     private Integer id;
 
     private String dataDicName;

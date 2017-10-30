@@ -3,14 +3,14 @@ package com.situ.crm.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatadicExample {
+public class DataDicExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public DatadicExample() {
+    public DataDicExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
