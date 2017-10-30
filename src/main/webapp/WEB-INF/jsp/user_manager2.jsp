@@ -7,79 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	$(function(){
-		/*展示数据的datagrid表格*/
-		$("#datagrid").datagrid({
-			url:'${ctx}/user/findAll.action',
-			method:'get',
-			fit:true,
-			singleSelect:false,
-			toolbar:'#toolbar',
-			rownumbers:true,
-			fitColumns:true,
-			pagination:true,
-			columns:[[    
-			     {field:'cb',checkbox:true,align:'center'},    
-			     {field:'id',title:'编号',width:80,align:'center'},    
-			     {field:'name',title:'用户名',width:100,align:'center'},    
-			     {field:'password',title:'密码',width:80,align:'center'},    
-			     {field:'trueName',title:'真实姓名',width:80,align:'center'},    
-			     {field:'email',title:'邮件',width:100,align:'center'},    
-			     {field:'phone',title:'联系电话',width:100,align:'center'},    
-			     {field:'roleName',title:'角色',width:100,align:'center'}    
-			]]  
-		});
-		
-		/*添加和修改弹出的dialog */
-		$("#dialog").dialog({
-			closed:'true',
-			buttons:[
-				{
-					text:'保存',
-					iconCls:'icon-ok',
-					handler:function(){
-						doSave();
-					}
-				},
-				{
-					text:'关闭',
-					iconCls:'icon-cancel',
-					handler:function(){
-						$("#dialog").dialog("close");
-					}
-				}
-				
-			]
-			
-		});
-	});
-	
-	/*添加或修改的dialog */
-	function doSave() {
-		$('#form').form('submit', {    
-		    url:url,    
-		    onSubmit: function(){    
-		        // do some check    
-		        if($("#roleName").combobox("getValue") == "") {
-		        	$.messager.alert("系统提示", "请选择用户角色");
-		        	return false;
-		        }
-		        //validate none 做表单字段验证，当所有字段都有效的时候返回true。该方法使用validatebox(验证框)插件。 
-		        // return false to prevent submit;  
-		        return $(this).form("validate");
-		    },    
-		    success:function(data){//正常返回ServerResponse
-		    	//alert(data);
-		    	var data = eval('(' + data + ')');
-		    	if(data.status == Util.SUCCESS) {
-		    		$.messager.alert("系统提示", data.msg);
-		    		$("#dialog").dialog("close");
-		    		$("#datagrid").datagrid("reload");
-		    	}
-		    }    
-		});  
-	}
-
 	/* 查找 */
 	function doSearch(value){
 		$("#datagrid").datagrid("load",{
@@ -132,10 +59,55 @@
 		$('#form').form("load", row);
 	}
 	
+	function closeDialog(){
+		 $("#dialog").dialog("close");
+	}
+	
+	function doSave(){
+		$('#form').form('submit', {    
+		    url:url,    
+		    onSubmit: function(){    
+		        // do some check    
+		        if($("#roleName").combobox("getValue") == "") {
+		        	$.messager.alert("系统提示", "请选择用户角色");
+		        	return false;
+		        }
+		        //validate none 做表单字段验证，当所有字段都有效的时候返回true。该方法使用validatebox(验证框)插件。 
+		        // return false to prevent submit;  
+		        return $(this).form("validate");
+		    },    
+		    success:function(data){//正常返回ServerResponse
+		    	//alert(data);
+		    	var data = eval('(' + data + ')');
+		    	if(data.status == Util.SUCCESS) {
+		    		$.messager.alert("系统提示", data.msg);
+		    		$("#dialog").dialog("close");
+		    		$("#datagrid").datagrid("reload");
+		    	}
+		    }    
+		});  
+
+	}
+	
 </script>
 </head>
 <body>
-	<table id="datagrid"></table>
+	<table id="datagrid" class="easyui-datagrid" rownumbers="true" fitColumns="true"
+		pagination="true"
+		data-options="fit:true,singleSelect:false,url:'${ctx}/user/findAll.action',method:'get',toolbar:'#toolbar'">
+		<thead>
+			<tr>
+				<th data-options="field:'cb',checkbox:true,align:'center'"></th>
+				<th data-options="field:'id',width:80,align:'center'">编号</th>
+				<th data-options="field:'name',width:100,align:'center'">用户名</th>
+				<th data-options="field:'password',width:80,align:'center'">密码</th>
+				<th data-options="field:'trueName',width:80,align:'center'">真实姓名</th>
+				<th data-options="field:'email',width:100,align:'center'">邮件</th>
+				<th data-options="field:'phone',width:100,align:'center'">联系电话</th>
+				<th data-options="field:'roleName',width:100,align:'center'">角色</th>
+			</tr>
+		</thead>
+	</table>
 	
 	<!-- toolbar 开始 -->
 	<div id="toolbar">
@@ -148,13 +120,14 @@
 	<!-- toolbar 结束 -->
 	
 	<!-- 添加和修改的dialog 开始 -->
-	<div id="dialog" style="width:650;height:280,padding: 10px 20px">
+	<div id="dialog" class="easyui-dialog" closed="true"
+		style="width:650;height:280,padding: 10px 20px" buttons="#dialog-button">
 		<form action="" id="form" method="post">
 			<input type="hidden" id="id" name="id"/>
 			<table cellspacing="8px">
 				<tr>
 					<td>用户名：</td>
-					<td><input type="text" id="name" name="name" class="easyui-validatebox" required="true"/><font color="red">*</font></td>
+					<td><input type="text" id="userName" name="userName" class="easyui-validatebox" required="true"/><font color="red">*</font></td>
 					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 					<td>密码：</td>
 					<td><input type="text" id="password" name="password" class="easyui-validatebox" required="true"/><font color="red">*</font></td>
@@ -172,7 +145,7 @@
 					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 					<td>用户角色：</td>
 					<td>
-						<select class="easyui-combobox" id="roleName" editable="false" name="roleName" style="width:160">
+						<select class="easyui-combobox" id="roleName" name="roleName" style="width:160">
 							<option></option>
 							<option value="系统管理员">系统管理员</option>
 							<option value="销售主管">销售主管</option>
@@ -185,6 +158,14 @@
 		</form>
 	</div>
 	<!-- 添加和修改的dialog 结束 -->
+	
+	
+	<!-- dialog-button 开始-->
+	<div id="dialog-button">
+		<a href="javascript:doSave()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
+		<a href="javascript:closeDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+	</div>
+	<!-- dialog-button 结束-->
 
 
 </body>
