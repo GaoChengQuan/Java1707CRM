@@ -69,4 +69,13 @@ public class UserServiceImpl implements IUserService{
 		return ServerResponse.createError("修改失败!");
 	}
 
+	@Override
+	public List<User> getCustomerManagerList() {
+		UserExample userExample =  new UserExample();
+		Criteria createCriteria = userExample.createCriteria();
+		createCriteria.andRoleNameEqualTo("客户经理");
+		List<User> userList = userMapper.selectByExample(userExample);
+		return userList;
+	}
+
 }

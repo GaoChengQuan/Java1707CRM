@@ -10,7 +10,7 @@
 	<!-- 配置Controller扫描 -->
     <context:component-scan base-package="com.situ.crm.controller" />
     <!-- 配置注解驱动 -->
-    <mvc:annotation-driven />
+    <mvc:annotation-driven/>
     
     <!-- jsp配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
