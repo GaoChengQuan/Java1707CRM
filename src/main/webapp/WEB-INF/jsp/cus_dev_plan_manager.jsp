@@ -195,11 +195,11 @@
 	
 	<!-- toolbar 开始 -->
 	<div id="toolbar">
-		<div>
+		<!-- <div>
 			<a class="easyui-linkbutton" href="javascript:openAddDialog()" iconCls="icon-add">添加</a>
 			<a class="easyui-linkbutton" href="javascript:openUpdateDialog()" iconCls="icon-edit">修改</a>
 			<a class="easyui-linkbutton" href="javascript:doDelete()" iconCls="icon-remove">删除</a>
-		</div>
+		</div> -->
 		<div>
 		       客户名称：<input type="text" id="s_customerName"/>
 		       概要：<input type="text" id="s_overview"/>

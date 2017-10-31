@@ -33,7 +33,7 @@ public class CusDevPlanController {
 
 	@RequestMapping("/index")
 	public String index() {
-		return "cus_dev_plan_manager";
+		return "cus_dev_plan_item_manager";
 	}
 	
 	@RequestMapping("/findAll")

@@ -18,4 +18,6 @@ public interface ISaleChanceService {
 	ServerResponse add(SaleChance saleChance);
 
 	ServerResponse update(SaleChance saleChance);
+
+	ServerResponse findById(Integer id);
 }
