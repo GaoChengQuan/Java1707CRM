@@ -43,6 +43,9 @@ public class SaleChanceServiceImpl implements ISaleChanceService{
 		if (saleChance.getStatus() != null) {
 			createCriteria.andStatusEqualTo(saleChance.getStatus());
 		}
+		if (saleChance.getDevResult() != null) {
+			createCriteria.andDevResultEqualTo(saleChance.getDevResult());
+		}
 		List<SaleChance> saleChanceList = saleChanceMapper.selectByExample(saleChanceExample);
 		//total
 		PageInfo<SaleChance> pageInfo = new PageInfo<>(saleChanceList);

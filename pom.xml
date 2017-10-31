@@ -126,7 +126,7 @@
 			<version>${c3p0-version}</version>
 		</dependency>
 		<!-- Jackson Json处理工具包 -->
-		<dependency>  
+		<!-- <dependency>  
 		    <groupId>com.fasterxml.jackson.core</groupId>  
 		    <artifactId>jackson-core</artifactId>  
 		    <version>${jackson.version}</version>  
@@ -135,7 +135,7 @@
     	<groupId>org.codehaus.jackson</groupId>  
 		    <artifactId>jackson-mapper-asl</artifactId>  
 		    <version>${jackson-mapper-asl.version}</version>  
-		</dependency>  
+		</dependency>   -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>

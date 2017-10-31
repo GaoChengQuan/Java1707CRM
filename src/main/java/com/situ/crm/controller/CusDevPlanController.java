@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.situ.crm.common.EasyUIDataGrideResult;
 import com.situ.crm.common.ServerResponse;
-import com.situ.crm.pojo.SaleChance;
-import com.situ.crm.service.ISaleChanceService;
+import com.situ.crm.pojo.CusDevPlan;
+import com.situ.crm.service.ICusDevPlanService;
 
 @Controller
-@RequestMapping("/saleChance")
-public class SaleChanceController {
+@RequestMapping("/cusDevPlan")
+public class CusDevPlanController {
 	@InitBinder 
 	public void initBinder(WebDataBinder binder) { 
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
@@ -29,40 +29,35 @@ public class SaleChanceController {
 
 	
 	@Autowired
-	private ISaleChanceService saleChanceService;
+	private ICusDevPlanService cusDevPlanService;
 
 	@RequestMapping("/index")
 	public String index() {
-		return "sale_chance_manager";
-	}
-	
-	@RequestMapping("/cusDevPlan")
-	public String cusDevPlan() {
 		return "cus_dev_plan_manager";
 	}
 	
 	@RequestMapping("/findAll")
 	@ResponseBody
-	public EasyUIDataGrideResult findAll(Integer page, Integer rows, SaleChance saleChance) {
-		return saleChanceService.findAll(page, rows, saleChance);
+	public EasyUIDataGrideResult findAll(Integer page, Integer rows, CusDevPlan cusDevPlan) {
+		return cusDevPlanService.findAll(page, rows, cusDevPlan);
 	}
 	
 	@RequestMapping("/delete")
 	@ResponseBody
 	public ServerResponse delete(String ids) {
-		return saleChanceService.delete(ids);
+		return cusDevPlanService.delete(ids);
 	}
 	
 	@RequestMapping("/add")
 	@ResponseBody
-	public ServerResponse add(SaleChance saleChance) {
-		return saleChanceService.add(saleChance);
+	public ServerResponse add(CusDevPlan cusDevPlan) {
+		return cusDevPlanService.add(cusDevPlan);
 	}
 	
 	@RequestMapping("/update")
 	@ResponseBody
-	public ServerResponse update(SaleChance saleChance) {
-		return saleChanceService.update(saleChance);
+	public ServerResponse update(CusDevPlan cusDevPlan) {
+		return cusDevPlanService.update(cusDevPlan);
 	}
 	
 }
