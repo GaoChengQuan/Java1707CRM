@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@include file="../common/head.jsp"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="${ctx}/resources/thirdlib/jquery-easyui/jquery.edatagrid.js"></script>
 <script type="text/javascript">
 	$(function(){
 		//查询指定id的销售机会
@@ -30,30 +32,44 @@
 				"json");
 		
 		/*展示数据的datagrid表格*/
-		$("#datagrid").datagrid({
+		$("#datagrid").edatagrid({
 			url:'${ctx}/cusDevPlan/findAll.action?saleChanceId=${param.saleChanceId}',//只查询已分配咨询师的
-			method:'get',
-			fit:true,
-			singleSelect:false,
+			saveUrl:'${ctx}/cusDevPlan/add.action?saleChanceId=${param.saleChanceId}',
+			updateUrl:'${ctx}/cusDevPlan/update.action?saleChanceId=${param.saleChanceId}',
+			destroyUrl:'${ctx}/cusDevPlan/deleteById.action'
+			/* title:'开发计划项',
+			singleSelect:true,
 			toolbar:'#toolbar',
 			rownumbers:true,
 			fitColumns:true,
-			pagination:true,
 			columns:[[    
-			     {field:'cb',checkbox:true,align:'center'},    
 			     {field:'id',title:'编号',width:50,align:'center'},    
-			     {field:'planDate',title:'日期',width:100,align:'center'},    
-			     {field:'planItem',title:'计划内容',width:80,align:'center'},    
-			     {field:'exeAffect',title:'执行结果',width:80,align:'center'}  
-			]]  
+			     {field:'planDate',title:'日期',width:100,align:'center',editor:{type:'datebox',options:{required:true}}},    
+			     {field:'planItem',title:'计划内容',width:80,align:'center',editor:{type:'validatebox',options:{required:true}}},    
+			     {field:'exeAffect',title:'执行结果',width:80,align:'center',editor:{type:'validatebox',options:{required:true}}}  
+			]]   */
 		});
 	});
+	
+	//更新销售机会客户开发状态
+	function updateSaleChanceDevResult(devResult){
+		 $.post("${ctx}/saleChance/updateDevResult.action",
+				 {saleChanceId:'${param.saleChanceId}',devResult:devResult},
+				 function(result){
+					 if(result.status == Util.SUCCESS){
+						 $.messager.alert("系统提示","执行成功！");
+					 }else{
+						 $.messager.alert("系统提示","执行失败！");
+					 }
+		 		},
+		 		"json");
+	 }
 		
 </script>
 </head>
 <body>
 	<!-- 营销机会信息面板  开始 -->
-	<div id="p" class="easyui-panel" title="销售机会信息" style="width: 700px;height: 400px;padding: 10px">
+	<div id="p" class="easyui-panel" title="销售机会信息" style="width: 700px;height: 320px">
 	 	<table cellspacing="8px">
 	   		<tr>
 	   			<td>客户名称：</td>
@@ -104,16 +120,28 @@
 	 </div>
 	 <!-- 营销机会信息面板  结束  -->
 	 
+	 <br/>
+	 
 	<!-- 客户开发计划项table -->
-	<table id="datagrid"></table>
+	<table id="datagrid" title="开发计划项" style="width:700px;height:250px"
+   			toolbar="#toolbar" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
+   		<thead>
+		   	<tr>
+		   		<th field="id" width="50">编号</th>
+		   		<th field="planDate" width="50" editor="{type:'datebox',options:{required:true}}">日期</th>
+		   		<th field="planItem" width="100" editor="{type:'validatebox',options:{required:true}}">计划内容</th>
+		   		<th field="exeAffect" width="100" editor="{type:'validatebox',options:{required:true}}">执行效果</th>
+		   	</tr>
+   		</thead>
+   </table>
 	
 	<!-- toolbar 开始 -->
 	 <div id="toolbar">
 	 	<c:if test="${param.show!='true' }">
-		 	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:$('#datagrid').edatagrid('addRow')">添加计划</a>
-		 	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#datagrid').edatagrid('destroyRow')">删除计划</a>
-		 	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#datagrid').edatagrid('saveRow');$('#datagrid').edatagrid('reload')">保存计划</a>
-		 	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#datagrid').edatagrid('cancelRow')">撤销行</a>
+		 	<a href="javascript:$('#datagrid').edatagrid('addRow')" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加计划</a>
+		 	<a href="javascript:$('#datagrid').edatagrid('destroyRow')" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除计划</a>
+		 	<a href="javascript:$('#datagrid').edatagrid('cancelRow')" class="easyui-linkbutton" iconCls="icon-undo" plain="true">撤销行</a>
+		 	<a href="javascript:$('#datagrid').edatagrid('saveRow');$('#datagrid').edatagrid('reload')" class="easyui-linkbutton" iconCls="icon-save" plain="true">保存计划</a>
 		 	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-kfcg" plain="true" onclick="updateSaleChanceDevResult(2)">开发成功</a>
 		 	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-zzkf" plain="true" onclick="updateSaleChanceDevResult(3)">终止开发</a>
 	 	</c:if>

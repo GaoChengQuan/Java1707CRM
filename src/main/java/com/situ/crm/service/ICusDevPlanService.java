@@ -14,6 +14,8 @@ public interface ICusDevPlanService {
 	EasyUIDataGrideResult findAll(Integer page, Integer rows, CusDevPlan cusDevPlan);
 
 	ServerResponse delete(String ids);
+	
+	ServerResponse deleteById(Integer id);
 
 	ServerResponse add(CusDevPlan cusDevPlan);
 

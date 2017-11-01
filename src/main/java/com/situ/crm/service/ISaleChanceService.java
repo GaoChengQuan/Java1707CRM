@@ -20,4 +20,6 @@ public interface ISaleChanceService {
 	ServerResponse update(SaleChance saleChance);
 
 	ServerResponse findById(Integer id);
+
+	ServerResponse updateDevResult(Integer saleChanceId, Integer devResult);
 }

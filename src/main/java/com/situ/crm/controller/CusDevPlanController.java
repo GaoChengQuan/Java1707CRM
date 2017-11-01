@@ -21,7 +21,7 @@ import com.situ.crm.service.ICusDevPlanService;
 public class CusDevPlanController {
 	@InitBinder 
 	public void initBinder(WebDataBinder binder) { 
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
 	    dateFormat.setLenient(false); 
 	    binder.registerCustomEditor(Date.class,
 	           new CustomDateEditor(dateFormat, true));
@@ -46,6 +46,12 @@ public class CusDevPlanController {
 	@ResponseBody
 	public ServerResponse delete(String ids) {
 		return cusDevPlanService.delete(ids);
+	}
+	
+	@RequestMapping("/deleteById")
+	@ResponseBody
+	public ServerResponse deleteById(Integer id) {
+		return cusDevPlanService.deleteById(id);
 	}
 	
 	@RequestMapping("/add")

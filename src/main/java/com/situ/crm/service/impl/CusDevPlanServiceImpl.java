@@ -26,19 +26,15 @@ public class CusDevPlanServiceImpl implements ICusDevPlanService{
 	public EasyUIDataGrideResult findAll(Integer page, Integer rows, CusDevPlan cusDevPlan) {
 		EasyUIDataGrideResult result = new EasyUIDataGrideResult();
 		CusDevPlanExample cusDevPlanExample = new CusDevPlanExample();
-		//1、设置分页 
-		PageHelper.startPage(page, rows);
 		//2、执行查询
 		//rows(分页之后的数据)
 		Criteria createCriteria = cusDevPlanExample.createCriteria();
-		/*if (StringUtils.isNotEmpty(cusDevPlan.getCustomerName())) {
-			createCriteria.andCustomerNameLike(Util.formatLike(cusDevPlan.getCustomerName()));
-		}*/
-		
+		if (cusDevPlan.getSaleChanceId() != null) {
+			createCriteria.andSaleChanceIdEqualTo(cusDevPlan.getSaleChanceId());
+		}
 		List<CusDevPlan> cusDevPlanList = cusDevPlanMapper.selectByExample(cusDevPlanExample);
 		//total
-		PageInfo<CusDevPlan> pageInfo = new PageInfo<>(cusDevPlanList);
-		int total = (int)pageInfo.getTotal();
+		int total = cusDevPlanMapper.countByExample(new CusDevPlanExample());
 		
 		result.setTotal(total);
 		result.setRows(cusDevPlanList);
@@ -50,6 +46,14 @@ public class CusDevPlanServiceImpl implements ICusDevPlanService{
 		String[] idArray = ids.split(",");
 		for (String id : idArray) {
 			cusDevPlanMapper.deleteByPrimaryKey(Integer.parseInt(id));
+		}
+		return ServerResponse.createSuccess("数据已经成功删除");
+	}
+	
+	@Override
+	public ServerResponse deleteById(Integer id) {
+		if (cusDevPlanMapper.deleteByPrimaryKey(id) > 0) {
+			return ServerResponse.createSuccess("删除数据成功 ");
 		}
 		return ServerResponse.createSuccess("数据已经成功删除");
 	}

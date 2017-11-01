@@ -95,4 +95,15 @@ public class SaleChanceServiceImpl implements ISaleChanceService{
 		return ServerResponse.createError("查找失败!");
 	}
 
+	@Override
+	public ServerResponse updateDevResult(Integer saleChanceId, Integer devResult) {
+		SaleChance saleChance = new SaleChance();
+		saleChance.setId(saleChanceId);
+		saleChance.setDevResult(devResult);
+		if (saleChanceMapper.updateByPrimaryKeySelective(saleChance) > 0) {
+			return ServerResponse.createSuccess("更新成功");
+		}
+		return ServerResponse.createError("更新失败");
+	}
+
 }
