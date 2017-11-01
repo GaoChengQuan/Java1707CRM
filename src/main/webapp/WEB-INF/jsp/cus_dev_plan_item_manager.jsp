@@ -36,8 +36,8 @@
 			url:'${ctx}/cusDevPlan/findAll.action?saleChanceId=${param.saleChanceId}',//只查询已分配咨询师的
 			saveUrl:'${ctx}/cusDevPlan/add.action?saleChanceId=${param.saleChanceId}',
 			updateUrl:'${ctx}/cusDevPlan/update.action?saleChanceId=${param.saleChanceId}',
-			destroyUrl:'${ctx}/cusDevPlan/deleteById.action'
-			/* title:'开发计划项',
+			destroyUrl:'${ctx}/cusDevPlan/deleteById.action',
+			title:'开发计划项',
 			singleSelect:true,
 			toolbar:'#toolbar',
 			rownumbers:true,
@@ -47,7 +47,7 @@
 			     {field:'planDate',title:'日期',width:100,align:'center',editor:{type:'datebox',options:{required:true}}},    
 			     {field:'planItem',title:'计划内容',width:80,align:'center',editor:{type:'validatebox',options:{required:true}}},    
 			     {field:'exeAffect',title:'执行结果',width:80,align:'center',editor:{type:'validatebox',options:{required:true}}}  
-			]]   */
+			]]
 		});
 	});
 	
@@ -123,17 +123,7 @@
 	 <br/>
 	 
 	<!-- 客户开发计划项table -->
-	<table id="datagrid" title="开发计划项" style="width:700px;height:250px"
-   			toolbar="#toolbar" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
-   		<thead>
-		   	<tr>
-		   		<th field="id" width="50">编号</th>
-		   		<th field="planDate" width="50" editor="{type:'datebox',options:{required:true}}">日期</th>
-		   		<th field="planItem" width="100" editor="{type:'validatebox',options:{required:true}}">计划内容</th>
-		   		<th field="exeAffect" width="100" editor="{type:'validatebox',options:{required:true}}">执行效果</th>
-		   	</tr>
-   		</thead>
-   </table>
+	<table id="datagrid" style="width:700px;height:250px"></table>
 	
 	<!-- toolbar 开始 -->
 	 <div id="toolbar">

@@ -72,6 +72,7 @@ public class SaleChanceServiceImpl implements ISaleChanceService{
 		}else{
 			saleChance.setStatus(0);//0：:未分配
 		}
+		saleChance.setDevResult(0);
 		if (saleChanceMapper.insert(saleChance) > 0) {
 			return ServerResponse.createSuccess("添加成功! ");
 		}

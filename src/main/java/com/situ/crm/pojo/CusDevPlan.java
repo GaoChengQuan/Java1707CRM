@@ -2,6 +2,8 @@ package com.situ.crm.pojo;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class CusDevPlan {
     private Integer id;
 
@@ -9,6 +11,7 @@ public class CusDevPlan {
 
     private String planItem;
 
+    
     private Date planDate;
 
     private String exeAffect;
@@ -37,6 +40,7 @@ public class CusDevPlan {
         this.planItem = planItem == null ? null : planItem.trim();
     }
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     public Date getPlanDate() {
         return planDate;
     }
