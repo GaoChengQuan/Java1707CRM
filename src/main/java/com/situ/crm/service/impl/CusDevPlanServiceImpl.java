@@ -34,7 +34,7 @@ public class CusDevPlanServiceImpl implements ICusDevPlanService{
 		}
 		List<CusDevPlan> cusDevPlanList = cusDevPlanMapper.selectByExample(cusDevPlanExample);
 		//total
-		int total = cusDevPlanMapper.countByExample(new CusDevPlanExample());
+		int total = cusDevPlanMapper.countByExample(cusDevPlanExample);
 		
 		result.setTotal(total);
 		result.setRows(cusDevPlanList);

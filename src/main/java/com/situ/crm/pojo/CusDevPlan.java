@@ -40,7 +40,7 @@ public class CusDevPlan {
         this.planItem = planItem == null ? null : planItem.trim();
     }
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" ,timezone="GMT+8")
     public Date getPlanDate() {
         return planDate;
     }
