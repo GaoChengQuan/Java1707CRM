@@ -27,4 +27,10 @@ public interface CustomerMapper {
     int updateByPrimaryKeySelective(Customer record);
 
     int updateByPrimaryKey(Customer record);
+
+    /**
+     * 查找最近六个月的流失客户
+     * @return
+     */
+	List<Customer> findLossCustomer();
 }

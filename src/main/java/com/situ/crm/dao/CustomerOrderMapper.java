@@ -27,4 +27,11 @@ public interface CustomerOrderMapper {
     int updateByPrimaryKeySelective(CustomerOrder record);
 
     int updateByPrimaryKey(CustomerOrder record);
+
+    /**
+     * 查询指定客户最后一个订单
+     * @param id
+     * @return
+     */
+	CustomerOrder findLastOrderByCustomerId(Integer id);
 }
