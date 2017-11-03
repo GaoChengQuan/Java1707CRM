@@ -1,17 +1,28 @@
 package com.situ.crm.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.situ.crm.common.EasyUIDataGrideResult;
 import com.situ.crm.dao.CustomerLossMapper;
 import com.situ.crm.dao.CustomerMapper;
 import com.situ.crm.dao.CustomerOrderMapper;
 import com.situ.crm.pojo.Customer;
 import com.situ.crm.pojo.CustomerLoss;
 import com.situ.crm.pojo.CustomerOrder;
+import com.situ.crm.pojo.User;
+import com.situ.crm.pojo.UserExample;
+import com.situ.crm.pojo.UserExample.Criteria;
 import com.situ.crm.service.ICustomerService;
+import com.situ.crm.util.Util;
+import com.situ.crm.vo.CustomerContribute;
 @Service
 public class CustomerServiceImpl implements ICustomerService{
 	@Autowired
@@ -47,6 +58,27 @@ public class CustomerServiceImpl implements ICustomerService{
 			customer.setStatus(1);
 			customerMapper.updateByPrimaryKeySelective(customer);
 		}
+	}
+
+	@Override
+	public EasyUIDataGrideResult findCustomerContribute(Integer page, Integer rows, CustomerContribute customerContribute) {
+		EasyUIDataGrideResult result = new EasyUIDataGrideResult();
+		//1、设置分页 
+		PageHelper.startPage(page, rows);
+		//2、执行查询
+		//rows(分页之后的数据)
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (StringUtils.isNoneBlank(customerContribute.getName())) {
+			map.put("name", customerContribute.getName());
+		}
+		List<CustomerContribute> list = customerMapper.findCustomerContribute(map);
+		//total
+		PageInfo<CustomerContribute> pageInfo = new PageInfo<>(list);
+		int total = (int)pageInfo.getTotal();
+		
+		result.setTotal(total);
+		result.setRows(list);
+		return result;
 	}
 
 }

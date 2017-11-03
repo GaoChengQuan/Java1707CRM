@@ -23,7 +23,7 @@ public class FindLossCustomerJob {
 	//@Scheduled(cron="0 0 2 * * ?")
 	@Scheduled(cron="0/10 * * * * ?")
 	public void work() {
-		System.out.println("FindLossCustomerJob.work()");
-		customerService.checkCustomerLoss();
+		//System.out.println("FindLossCustomerJob.work()");
+		//customerService.checkCustomerLoss();
 	}
 }
