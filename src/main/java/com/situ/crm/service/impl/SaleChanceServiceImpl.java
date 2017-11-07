@@ -147,10 +147,10 @@ public class SaleChanceServiceImpl implements ISaleChanceService{
 			cell1.setCellValue("用户列表");
 
 			// 3.2、创建列标题行；并且设置列标题
-			HSSFRow row2 = sheet.createRow(1);
+			HSSFRow rowHead = sheet.createRow(1);
 			String[] titles = { "编号", "客户名称", "概要", "联系人", "练习电话","创建人","创建时间","状态" };
 			for (int i = 0; i < titles.length; i++) {
-				HSSFCell cell2 = row2.createCell(i);
+				HSSFCell cell2 = rowHead.createCell(i);
 				// 加载单元格样式
 				cell2.setCellStyle(style2);
 				cell2.setCellValue(titles[i]);
